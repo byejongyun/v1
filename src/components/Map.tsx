@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Place } from '@/types';
@@ -54,10 +54,12 @@ export default function Map({ places, userLat, userLng, onMarkerClick }: Props) 
     <MapContainer
       center={center}
       zoom={15}
+      zoomControl={false}
       scrollWheelZoom={true}
       className="w-full h-full z-0"
       style={{ minHeight: '100%' }}
     >
+      <ZoomControl position="bottomright" />
       <ChangeView center={center} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
