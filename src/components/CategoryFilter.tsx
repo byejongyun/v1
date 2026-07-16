@@ -10,9 +10,9 @@ interface Props {
 export default function CategoryFilter({ activeCategory, onSelectCategory }: Props) {
   const categories: { id: Category; label: string }[] = [
     { id: 'All', label: '전체' },
-    { id: 'Food', label: '먹거리(맛집/카페)' },
-    { id: 'Activity', label: '놀거리(코노/PC등)' },
-    { id: 'Place', label: '공간(휴식/모임)' },
+    { id: 'Food', label: '먹거리(맛집/카페 등)' },
+    { id: 'Activity', label: '놀거리(코노/PC 등)' },
+    { id: 'Place', label: '공간(휴식/모임 등)' },
   ];
 
   return (

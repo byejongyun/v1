@@ -24,7 +24,7 @@ export default function SearchBar({ searchQuery, onSearchChange }: Props) {
           type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="장소명 검색 (예: 코인노래방)"
+          placeholder="장소명 검색"
           className="w-full pl-11 pr-4 py-3 bg-white/95 backdrop-blur-md border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-gray-800 placeholder-gray-400 relative z-10"
         />
       </div>
