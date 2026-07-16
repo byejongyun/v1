@@ -63,9 +63,37 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen relative flex flex-col">
-      <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-white/90 via-white/70 to-transparent pb-6 pt-4">
+      <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-white/90 via-white/70 to-transparent pb-6 pt-4 flex flex-col">
         <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
         <CategoryFilter activeCategory={activeCategory} onSelectCategory={setActiveCategory} />
+        
+        {searchQuery.trim().length > 0 && (
+          <div className="mx-4 mt-2 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden max-h-60 overflow-y-auto shrink-0">
+            {filteredPlaces.length > 0 ? (
+              <ul className="divide-y divide-gray-100">
+                {filteredPlaces.map(place => (
+                  <li 
+                    key={place.id}
+                    onClick={() => {
+                      handleMarkerClick(place);
+                      setSearchQuery('');
+                    }}
+                    className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors flex items-center"
+                  >
+                    <span className="text-gray-800 font-medium text-sm">{place.name}</span>
+                    <span className="ml-auto text-xs text-gray-400">
+                      {place.category === 'Food' ? '🍽 먹거리' : place.category === 'Place' ? '☕ 공간' : '🎯 놀거리'}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="px-4 py-6 text-center text-gray-500 text-sm font-medium">
+                "{searchQuery}" 검색 결과가 없습니다.
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="flex-1 w-full relative">
