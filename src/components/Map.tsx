@@ -82,6 +82,7 @@ function LocationButton({ center }: { center: [number, number] }) {
   );
 }
 
+
 const worldCoords: [number, number][] = [
   [-90, -180],
   [90, -180],

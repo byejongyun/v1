@@ -12,10 +12,11 @@ export default function SearchBar({ searchQuery, onSearchChange }: Props) {
       <Image 
         src="/logo.png" 
         alt="경산 플레이스 로고" 
-        width={200} 
-        height={50} 
-        className="shrink-0 h-auto w-auto max-h-[60px] object-contain"
+        width={250} 
+        height={70} 
+        className="shrink-0 h-auto w-auto max-h-[80px] object-contain cursor-pointer hover:opacity-80 transition-opacity"
         priority
+        onClick={() => window.location.reload()}
       />
       <div className="relative flex items-center flex-1 min-w-0">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5 z-20 pointer-events-none" />
