@@ -33,10 +33,11 @@ interface Props {
   places: Place[];
   userLat: number | null;
   userLng: number | null;
+  selectedPlace: Place | null;
   onMarkerClick: (place: Place) => void;
 }
 
-// 지도 중심 이동용 헬퍼 컴포넌트
+// 지도 중심 이동용 헬퍼 컴포넌트 (초기 로드용)
 function ChangeView({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
@@ -45,7 +46,18 @@ function ChangeView({ center }: { center: [number, number] }) {
   return null;
 }
 
-export default function Map({ places, userLat, userLng, onMarkerClick }: Props) {
+// 특정 장소 선택 시 이동하는 컴포넌트
+function FlyToPlace({ place }: { place: Place | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (place) {
+      map.flyTo([place.lat, place.lng], 16, { animate: true, duration: 1 });
+    }
+  }, [place, map]);
+  return null;
+}
+
+export default function Map({ places, userLat, userLng, selectedPlace, onMarkerClick }: Props) {
   const centerLat = userLat ?? 35.8294; // 영남대역 기본값
   const centerLng = userLng ?? 128.7545;
   const center: [number, number] = [centerLat, centerLng];
@@ -61,6 +73,7 @@ export default function Map({ places, userLat, userLng, onMarkerClick }: Props) 
     >
       <ZoomControl position="bottomright" />
       <ChangeView center={center} />
+      <FlyToPlace place={selectedPlace} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

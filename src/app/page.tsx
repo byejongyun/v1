@@ -101,6 +101,7 @@ export default function Home() {
           places={filteredPlaces} 
           userLat={userLat} 
           userLng={userLng} 
+          selectedPlace={selectedPlace}
           onMarkerClick={handleMarkerClick} 
         />
       </div>
