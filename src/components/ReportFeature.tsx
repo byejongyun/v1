@@ -31,22 +31,54 @@ export default function ReportFeature() {
           {/* 모달 밖 클릭시 닫기 */}
           <div className="absolute inset-0" onClick={() => setIsOpen(false)} />
           
-          <div className="bg-[#f8fbff] border border-blue-100/80 rounded-3xl w-full max-w-sm shadow-2xl relative z-10 animate-in fade-in zoom-in-95 duration-200 p-10 text-center flex flex-col items-center justify-center">
+          <div className="bg-white rounded-[24px] w-full max-w-sm shadow-2xl overflow-hidden relative z-10 animate-in fade-in zoom-in-95 duration-200">
             {/* 닫기 버튼 */}
             <button 
               onClick={() => setIsOpen(false)}
-              className="absolute top-3 right-3 p-1.5 text-blue-300 hover:text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
+              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 bg-gray-50 hover:bg-gray-100 rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <p className="text-sm text-blue-500 font-bold mb-3 tracking-wide">제보 메일 주소</p>
-            <a 
-              href="mailto:gyeongsanplace_contact@proton.me" 
-              className="text-lg font-bold text-blue-600 hover:text-blue-800 transition-colors select-all break-all"
-            >
-              gyeongsanplace_contact@proton.me
-            </a>
+            <div className="p-6 pt-7">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 tracking-tight">제보하기</h2>
+              </div>
+              
+              <div className="text-[14px] text-gray-600 leading-relaxed mb-6 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <p className="mb-3">
+                  오류를 제보하실 경우 자유롭게 제보해 주시고, 
+                  장소를 제보하실 경우 아래 양식에 맞추어 제보해주세요.
+                </p>
+                <div className="bg-white p-3 rounded-xl border border-gray-200/60 shadow-sm">
+                  <ol className="list-decimal pl-5 space-y-1.5 font-medium text-gray-700">
+                    <li>장소 이름</li>
+                    <li>주소</li>
+                    <li>카테고리 (먹거리, 놀거리, 공간)</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-4 text-center mb-6">
+                <a 
+                  href="mailto:gyeongsanplace_contact@proton.me" 
+                  className="text-base font-bold text-blue-600 hover:text-blue-800 transition-colors select-all break-all"
+                >
+                  gyeongsanplace_contact@proton.me
+                </a>
+              </div>
+              
+              <a 
+                href="mailto:gyeongsanplace_contact@proton.me"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center transition-all active:scale-[0.98] shadow-lg shadow-blue-500/25"
+                onClick={() => setIsOpen(false)}
+              >
+                메일 앱 열기
+              </a>
+            </div>
           </div>
         </div>
       )}
