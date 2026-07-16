@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Place } from '@/types';
+import gyeongsanGeo from '@/data/gyeongsan.json';
 
 // Leaflet 기본 마커 아이콘 설정 (Next.js에서 깨지는 문제 해결)
 const defaultIcon = L.icon({
@@ -61,7 +62,7 @@ function FlyToPlace({ place }: { place: Place | null }) {
 function LocationButton({ center }: { center: [number, number] }) {
   const map = useMap();
   return (
-    <div className="leaflet-bottom leaflet-right" style={{ bottom: '80px', right: '0px' }}>
+    <div className="leaflet-bottom leaflet-right" style={{ bottom: '100px', right: '0px' }}>
       <div className="leaflet-control leaflet-bar" style={{ border: 'none', boxShadow: '0 2px 10px rgba(0,0,0,0.2)', margin: '10px' }}>
         <button 
           onClick={(e) => {
@@ -80,6 +81,15 @@ function LocationButton({ center }: { center: [number, number] }) {
     </div>
   );
 }
+
+const worldCoords: [number, number][] = [
+  [-90, -180],
+  [90, -180],
+  [90, 180],
+  [-90, 180],
+];
+const gyeongsanCoords = gyeongsanGeo.coordinates[0].map((c: number[]) => [c[1], c[0]] as [number, number]);
+const maskPositions = [worldCoords, gyeongsanCoords];
 
 export default function Map({ places, userLat, userLng, selectedPlace, onMarkerClick }: Props) {
   const centerLat = userLat ?? 35.8294; // 영남대역 기본값
@@ -102,6 +112,12 @@ export default function Map({ places, userLat, userLng, selectedPlace, onMarkerC
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      
+      {/* 경산 이외 지역 회색 블러(반투명) 마스크 */}
+      <Polygon
+        positions={maskPositions}
+        pathOptions={{ color: '#000', fillColor: '#000', fillOpacity: 0.3, weight: 2, opacity: 0.5 }}
       />
 
       {/* 사용자 위치 마커 */}
