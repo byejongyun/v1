@@ -7,6 +7,7 @@ import { supabase } from '@/lib/supabase';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
 import PlaceBottomSheet from '@/components/PlaceBottomSheet';
+import ReportFeature from '@/components/ReportFeature';
 
 // Leaflet은 window 객체가 필요하므로 SSR 비활성화
 const Map = dynamic(() => import('@/components/Map'), { 
@@ -112,6 +113,7 @@ export default function Home() {
         userLng={userLng} 
         onClose={() => setSelectedPlace(null)} 
       />
+      <ReportFeature />
     </main>
   );
 }
