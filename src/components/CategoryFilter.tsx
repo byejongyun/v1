@@ -16,7 +16,7 @@ export default function CategoryFilter({ activeCategory, onSelectCategory }: Pro
   ];
 
   return (
-    <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide px-4 pt-4">
+    <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide px-4 pt-1">
       {categories.map(c => (
         <button
           key={c.id}

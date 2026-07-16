@@ -63,7 +63,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen relative flex flex-col">
-      <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-white/90 via-white/70 to-transparent pb-6 pt-4 flex flex-col">
+      <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-white/95 via-white/80 to-transparent pb-10 pt-4 flex flex-col">
         <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
         <CategoryFilter activeCategory={activeCategory} onSelectCategory={setActiveCategory} />
         
