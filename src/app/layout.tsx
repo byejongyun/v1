@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '경산 로컬 플레이스 추천',
+  title: '경산 플레이스',
   description: '내 주변 먹거리와 놀거리를 실시간으로 추천해 드립니다.',
 };
 
