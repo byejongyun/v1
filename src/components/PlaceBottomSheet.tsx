@@ -38,6 +38,17 @@ export default function PlaceBottomSheet({ place, userLat, userLng, onClose }: P
     window.open(url, '_blank');
   };
 
+  const getCategoryStyles = (category: string) => {
+    switch (category) {
+      case 'Food': return { bg: 'bg-orange-100', text: 'text-orange-700', label: '🍽 먹거리' };
+      case 'Activity': return { bg: 'bg-purple-100', text: 'text-purple-700', label: '🎯 놀거리' };
+      case 'Place': return { bg: 'bg-green-100', text: 'text-green-700', label: '☕ 공간' };
+      default: return { bg: 'bg-gray-100', text: 'text-gray-700', label: '📍 장소' };
+    }
+  };
+
+  const catStyle = getCategoryStyles(place.category);
+
   return (
     <>
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity" onClick={onClose} />
@@ -52,8 +63,8 @@ export default function PlaceBottomSheet({ place, userLat, userLng, onClose }: P
           </button>
           
           <div className="flex items-center space-x-2 mb-3">
-            <span className={`px-3 py-1.5 text-xs font-bold rounded-full ${place.category === 'Food' ? 'bg-orange-100 text-orange-700' : 'bg-purple-100 text-purple-700'}`}>
-              {place.category === 'Food' ? '🍽 먹거리' : '🎯 놀거리'}
+            <span className={`px-3 py-1.5 text-xs font-bold rounded-full ${catStyle.bg} ${catStyle.text}`}>
+              {catStyle.label}
             </span>
             {distance && (
               <span className="flex items-center text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full">
