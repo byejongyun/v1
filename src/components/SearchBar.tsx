@@ -14,7 +14,7 @@ export default function SearchBar({ searchQuery, onSearchChange }: Props) {
         alt="경산 플레이스 로고" 
         width={200} 
         height={50} 
-        className="shrink-0 h-auto w-auto max-h-[40px] object-contain"
+        className="shrink-0 h-auto w-auto max-h-[50px] object-contain"
         priority
       />
       <div className="relative flex items-center flex-1 min-w-0">
