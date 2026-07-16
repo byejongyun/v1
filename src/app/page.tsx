@@ -20,7 +20,7 @@ const Map = dynamic(() => import('@/components/Map'), {
 
 export default function Home() {
   const [places, setPlaces] = useState<Place[]>([]);
-  const [activeCategory, setActiveCategory] = useState<'All' | 'Food' | 'Activity'>('All');
+  const [activeCategory, setActiveCategory] = useState<'All' | 'Food' | 'Activity' | 'Place'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   
