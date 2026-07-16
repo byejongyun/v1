@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${inter.className} bg-gray-100`}>
-        <div className="max-w-md mx-auto bg-white min-h-screen relative shadow-2xl overflow-hidden">
+        <div className="w-full bg-white min-h-screen relative shadow-2xl overflow-hidden">
           {children}
         </div>
       </body>
