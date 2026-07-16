@@ -57,10 +57,34 @@ function FlyToPlace({ place }: { place: Place | null }) {
   return null;
 }
 
+// 내 위치로 이동하는 버튼 컴포넌트
+function LocationButton({ center }: { center: [number, number] }) {
+  const map = useMap();
+  return (
+    <div className="leaflet-bottom leaflet-right" style={{ bottom: '80px', right: '0px' }}>
+      <div className="leaflet-control leaflet-bar" style={{ border: 'none', boxShadow: '0 2px 10px rgba(0,0,0,0.2)', margin: '10px' }}>
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            map.flyTo(center, 15, { animate: true, duration: 1 });
+          }}
+          className="bg-white hover:bg-gray-50 w-[34px] h-[34px] flex items-center justify-center rounded-[4px] cursor-pointer"
+          title="내 위치로 이동"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-700">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Map({ places, userLat, userLng, selectedPlace, onMarkerClick }: Props) {
   const centerLat = userLat ?? 35.8294; // 영남대역 기본값
   const centerLng = userLng ?? 128.7545;
-  const center: [number, number] = [centerLat, centerLng];
+  const center: [number, number] = useMemo(() => [centerLat, centerLng], [centerLat, centerLng]);
 
   return (
     <MapContainer
@@ -72,6 +96,7 @@ export default function Map({ places, userLat, userLng, selectedPlace, onMarkerC
       style={{ minHeight: '100%' }}
     >
       <ZoomControl position="bottomright" />
+      <LocationButton center={center} />
       <ChangeView center={center} />
       <FlyToPlace place={selectedPlace} />
       <TileLayer
