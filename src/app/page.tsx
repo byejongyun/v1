@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { Place } from '@/types';
+import { supabase } from '@/lib/supabase';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
 import PlaceBottomSheet from '@/components/PlaceBottomSheet';
@@ -27,9 +28,15 @@ export default function Home() {
   const [userLng, setUserLng] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('/places.json')
-      .then(res => res.json())
-      .then(data => setPlaces(data));
+    const fetchPlaces = async () => {
+      const { data, error } = await supabase.from('places').select('*');
+      if (error) {
+        console.error('Error fetching places from Supabase:', error);
+      } else if (data) {
+        setPlaces(data);
+      }
+    };
+    fetchPlaces();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
